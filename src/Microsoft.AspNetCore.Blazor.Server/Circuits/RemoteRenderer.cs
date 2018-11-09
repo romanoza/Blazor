@@ -85,10 +85,11 @@ namespace Microsoft.AspNetCore.Blazor.Browser.Rendering
         }
 
         /// <inheritdoc />
-        protected override void UpdateDisplay(in RenderBatch batch)
+        protected override Task UpdateDisplay(in RenderBatch batch)
         {
             var task = _client.SendAsync("JS.RenderBatch", _id, batch);
             CaptureAsyncExceptions(task);
+            return task;
         }
 
         private void CaptureAsyncExceptions(Task task)
